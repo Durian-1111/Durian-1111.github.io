@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Jesbin">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Jesbin">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="第一周笔记@Jesbin       &#x3D;&#x3D;Matlab常用模型&#x3D;&#x3D;预测模型: 神经网络预测、灰色预测、拟合插值预测（线性回归）、时间序列 预测、马尔科夫链预测、微分方程预测、Logistic 模型等等。  应用领域：人口预测、水资源污染增长预测、病毒蔓延预测、竞赛获胜概率 预测、月收入预测、销量预测、经济发展情况预测等在工业、农业、商业等经济 领域，以及环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数模笔记1">
+<meta property="og:url" content="http://example.com/2022/02/18/%E7%AC%AC%E4%B8%80%E5%91%A8matlab%E7%AC%94%E8%AE%B0@Jesbin/index.html">
+<meta property="og:site_name" content="Jesbin&#39;s Blog">
+<meta property="og:description" content="第一周笔记@Jesbin       &#x3D;&#x3D;Matlab常用模型&#x3D;&#x3D;预测模型: 神经网络预测、灰色预测、拟合插值预测（线性回归）、时间序列 预测、马尔科夫链预测、微分方程预测、Logistic 模型等等。  应用领域：人口预测、水资源污染增长预测、病毒蔓延预测、竞赛获胜概率 预测、月收入预测、销量预测、经济发展情况预测等在工业、农业、商业等经济 领域，以及环境">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225195123796.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225200109661.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225200943309.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225204124604.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225204254928.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225205324727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225205433194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225205539131.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225205645610.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225205811959.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200225205913897.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2022-02-18T02:04:21.484Z">
+<meta property="article:modified_time" content="2022-02-18T11:32:43.632Z">
+<meta property="article:author" content="Jesbin">
+<meta property="article:tag" content="note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200225195123796.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    
+    <title>数模笔记1 · Jesbin&#39;s Studio</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20220217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20220217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20220217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20220217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20220217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.0.0"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+<script src="\assets\js\Meting.min.js" class="meting-script-marker"></script>
+</head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>Jesbin's Studio.</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Jesbin&#39;s Studio.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">数模笔记1</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                数模笔记1
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="note">note</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">3.1k</span>阅读时长: <span class="post-count reading-time">11 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2022/02/18</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="第一周笔记-Jesbin"><a href="#第一周笔记-Jesbin" class="headerlink" title="第一周笔记@Jesbin"></a><strong>第一周笔记@Jesbin</strong></h1>
+    <div id="aplayer-loUbdewp" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="6883421967" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="100px" data-preload="auto" data-theme="#FF4081"></div>
+
+<h2 id="x3D-x3D-Matlab常用模型-x3D-x3D"><a href="#x3D-x3D-Matlab常用模型-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;Matlab常用模型&#x3D;&#x3D;"></a><strong>&#x3D;&#x3D;Matlab常用模型&#x3D;&#x3D;</strong></h2><h3 id="预测模型"><a href="#预测模型" class="headerlink" title="预测模型:"></a><strong>预测模型</strong>:</h3><ul>
+<li>神经网络预测、灰色预测、拟合插值预测（线性回归）、时间序列 预测、马尔科夫链预测、微分方程预测、Logistic 模型等等。 </li>
+<li><strong>应用领域</strong>：人口预测、水资源污染增长预测、病毒蔓延预测、竞赛获胜概率 预测、月收入预测、销量预测、经济发展情况预测等在工业、农业、商业等经济 领域，以及环境、社会和军事等领域中的应用</li>
+</ul>
+<h3 id="优化模型："><a href="#优化模型：" class="headerlink" title="优化模型："></a><strong>优化模型：</strong></h3><ul>
+<li><p>规划模型（目标规划、线性规划、非线性规划、整数规划、动态 规划）、图论模型、排队论模型、神经网络模型、现代优化算法（遗传算法、 模拟退火算法、蚁群算法、禁忌搜索算法）等等。</p>
+</li>
+<li><p><strong>应用领域</strong>：快递员派送快递的最短路径问题、水资源调度优化问题、高速路 口收费站问题、军事行动避空侦察的时机和路线选择、物流选址问题、商区布局 规划等各个领域。</p>
+<span id="more"></span></li>
+</ul>
+<h3 id="评价模型"><a href="#评价模型" class="headerlink" title="评价模型:"></a><strong>评价模型</strong>:</h3><ul>
+<li>模糊综合评价法、层次分析法、聚类分析法、主成分分析评价法、 灰色综合评价法、人工神经网络评价法等等。    </li>
+<li><strong>应用领域</strong>：某区域水资源评价、水利工程项目风险评价、城市发展程度评价、 足球教练评价、篮球队评价、水生态评价、大坝安全评价、边坡稳定性评价</li>
+</ul>
+<h3 id="数据的描述性统计分析："><a href="#数据的描述性统计分析：" class="headerlink" title="数据的描述性统计分析："></a><strong>数据的描述性统计分析：</strong></h3><ul>
+<li><p>基本的概念： 数据的趋势、特征和数量关系，包括描述性统计量【算术平均值、中位数、标准差、方差、极差、偏度和峰度】、参数估计、假设检验….分布函数、密度函数和分位数 、分布拟合检验、中位数检验….</p>
+</li>
+<li><p>数据的统计描述和分析的方法—概率论与数理统计的基本知识 ： 总体、样本、  频数表、直方图 、 统计量 、算术平均值、中位数 、标准差、方差和极差、偏度和峰度 、中心矩、分布函数、密度函数和分位数 ，正态分布  、卡方分布(Chi square) 、t分布 、F 分布；参数估计的  点估计 &amp;区间估计 &amp;  Matlab 实现；假设检验：Z 检验、t检验、分布拟合检验 、 偏度、峰度检验Wilcoxon秩和检验、中位数检验。一般如果有数据，就可以先查看数据的各维度的描述性统计信息，来查看数据的质量，并假设数据可能的分布。有了这些基本印象后，再对数据进行预处理。</p>
+</li>
+<li><p>常用离散分布：二项分布、泊松分布、超几何分布、几何分布、 负二项分布</p>
+<p>常用连续分布: 对正态分布、均匀分布、指数分布、伽马分布、卡方分布与贝塔分布作了大致的介绍，需要记住它们的参数、数学期望与方差、以及密度函数，一个分布就是一个概率模型。</p>
+</li>
+</ul>
+<h2 id="x3D-x3D-Matlab常用十大算法-x3D-x3D"><a href="#x3D-x3D-Matlab常用十大算法-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;Matlab常用十大算法&#x3D;&#x3D;"></a>&#x3D;&#x3D;<strong>Matlab常用十大算法</strong>&#x3D;&#x3D;</h2><h3 id="1、蒙特克罗算法"><a href="#1、蒙特克罗算法" class="headerlink" title="1、蒙特克罗算法"></a><strong>1、</strong>蒙特克罗算法</h3><p>（又称为随机性模拟算法，是通过计算机仿真来解决问题的算法，同时可以通过模拟可以来检测自己模型的正确性，是比赛的必用算法）</p>
+<h3 id="2、数据拟合，参数估计，插值等数据处理算法"><a href="#2、数据拟合，参数估计，插值等数据处理算法" class="headerlink" title="2、数据拟合，参数估计，插值等数据处理算法"></a><strong>2、</strong>数据拟合，参数估计，插值等数据处理算法</h3><p>（比赛中通常会遇到大量的数据需要处理，而处理数据的关键在于这些算法，通常使用Matlab作为工具）</p>
+<h3 id="3、线性规划，整数规划、多元规划、二次规划等规划类问题"><a href="#3、线性规划，整数规划、多元规划、二次规划等规划类问题" class="headerlink" title="3、线性规划，整数规划、多元规划、二次规划等规划类问题"></a><strong>3、</strong>线性规划，整数规划、多元规划、二次规划等规划类问题</h3><p>（建模比赛大多数问题属于最优化问题，很多时候这些问题可以使用数学规划算法来描述，通常使用Lingo软件实现）</p>
+<h3 id="4、图论算法"><a href="#4、图论算法" class="headerlink" title="4、图论算法"></a><strong>4、</strong>图论算法</h3><p>（这类算法可以分为很多种，包括最短路，网络流，二分图等算法，涉及到图论的问题可以用这些方法解决，需要认真准备）</p>
+<h3 id="5、动态规划、回溯搜索、分治算法、分支定界等计算机算法"><a href="#5、动态规划、回溯搜索、分治算法、分支定界等计算机算法" class="headerlink" title="5、动态规划、回溯搜索、分治算法、分支定界等计算机算法"></a><strong>5、</strong>动态规划、回溯搜索、分治算法、分支定界等计算机算法</h3><p>（这些算法是算法设计中比较常用的算法，很多场合可以用到竞赛中）</p>
+<h3 id="6、最优化理论的三大经典算法：模拟退火法、神经网络、遗传算法"><a href="#6、最优化理论的三大经典算法：模拟退火法、神经网络、遗传算法" class="headerlink" title="6、最优化理论的三大经典算法：模拟退火法、神经网络、遗传算法"></a><strong>6、</strong>最优化理论的三大经典算法：模拟退火法、神经网络、遗传算法</h3><p>（解决最优化问题，但算法实现比较困难，慎用）</p>
+<h3 id="7、网络算法和穷举法"><a href="#7、网络算法和穷举法" class="headerlink" title="7、网络算法和穷举法"></a><strong>7、</strong>网络算法和穷举法</h3><p>（暴力搜索最优点算法）</p>
+<h3 id="8、连续离散化方法"><a href="#8、连续离散化方法" class="headerlink" title="8、连续离散化方法"></a><strong>8、</strong>连续离散化方法</h3><p>（离散化进行差分代替微分、求和代替积分</p>
+<h3 id="9、数值分析算法"><a href="#9、数值分析算法" class="headerlink" title="9、数值分析算法"></a><strong>9、</strong>数值分析算法</h3><p>（适用于在比赛中用高级语言编程，采用数值分析中常用的的算法比如方程组求解、矩阵运算、函数积分等需要额外编写库函数进行调用）</p>
+<h3 id="10、图像处理算法"><a href="#10、图像处理算法" class="headerlink" title="10、图像处理算法"></a><strong>10、</strong>图像处理算法</h3><p>（考题中与与图形有关的一类问题，即使无关，也应该多用图形展示如何处理需要解决的问题）</p>
+<h2 id="x3D-x3D-Matlab常用的语法-x3D-x3D"><a href="#x3D-x3D-Matlab常用的语法-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;Matlab常用的语法&#x3D;&#x3D;"></a><strong>&#x3D;&#x3D;Matlab常用的语法&#x3D;&#x3D;</strong></h2><h3 id="软件的一些基本命令操作"><a href="#软件的一些基本命令操作" class="headerlink" title="软件的一些基本命令操作"></a>软件的一些基本命令操作</h3><h4 id="A-MATLAB的搜索路径"><a href="#A-MATLAB的搜索路径" class="headerlink" title="A. MATLAB的搜索路径"></a><strong>A. MATLAB的搜索路径</strong></h4><p>1、 用户在命令行窗口输入一条命令后，MATLAB将按照一定顺序依次寻找命令对象。<br>顺序（当以下都同名时）<br>如（clear清楚工作区的全部变量）<br>定义变量名时要避免与文件名和函数名重复。<br>2、 设置文件搜索路径<br>使用path命令，&gt;&gt;path(path,’e:\work’)<br>用对话框设置文件搜索路径<br>在命令行输入文件名后，MATLAB是在当前文件夹与搜索路径文件夹中寻找这个文件并执行文件内容的，所以要执行的文件必须放在这两类文件夹中。<br>如果两个文件夹种有同名的M文件，在命令行输入这个文件名执行顺序：当前文件夹&gt;搜索路径文件夹</p>
+<h4 id="B、-MATLAB数值数据"><a href="#B、-MATLAB数值数据" class="headerlink" title="B、 MATLAB数值数据"></a><strong>B、 MATLAB数值数据</strong></h4><h5 id="B-a-数值数据类型的分类-class"><a href="#B-a-数值数据类型的分类-class" class="headerlink" title="B.a 数值数据类型的分类(class)"></a>B.a 数值数据类型的分类(class)</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">使用class函数可以得到参数的数据类型</span><br><span class="line">&gt;&gt;class(4)</span><br><span class="line">ans=</span><br><span class="line">double</span><br><span class="line">&gt;&gt;class(single(4))</span><br><span class="line">ans=</span><br><span class="line">single</span><br></pre></td></tr></table></figure>
+
+<h6 id="1-整形："><a href="#1-整形：" class="headerlink" title="1 整形："></a>1 整形：</h6><ul>
+<li><p>无符号整数，8位，16位，32位,64位整数（取值范围，例如8位，00000000-11111111（0 ~ 2^8-1)）</p>
+</li>
+<li><p>带符号整数，8位，16位，32位,64位整数（取值范围，例如8位，10000000-01111111（-2^7 ~ 2^7-1)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;x=int8(129)//有符号 到127</span><br><span class="line">x=</span><br><span class="line"> 127</span><br><span class="line">&gt;&gt;x=uint8(129)//无符号 到255</span><br><span class="line">x=</span><br><span class="line"> 129</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h6 id="2-浮点型：（单：4，双：8）"><a href="#2-浮点型：（单：4，双：8）" class="headerlink" title="2 浮点型：（单：4，双：8）"></a>2 浮点型：（单：4，双：8）</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">使用class函数可以得到参数的数据类型</span><br><span class="line">&gt;&gt;class(4)</span><br><span class="line">ans=</span><br><span class="line">double</span><br><span class="line">&gt;&gt;class(single(4))</span><br><span class="line">ans=</span><br><span class="line">single</span><br></pre></td></tr></table></figure>
+
+<h6 id="3-复数型："><a href="#3-复数型：" class="headerlink" title="3 复数型："></a>3 复数型：</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">虚数单位为i或j都可以</span><br><span class="line">real() %求复数的实部</span><br><span class="line">imag() %求复数的虚部</span><br></pre></td></tr></table></figure>
+
+<h5 id="B-b-数值数据的输出格式-format-1"><a href="#B-b-数值数据的输出格式-format-1" class="headerlink" title="B.b 数值数据的输出格式(format)^1"></a>B.b 数值数据的输出格式(format)<a href="%E6%B3%A8%EF%BC%9A%E4%B8%8D%E5%90%8C%E7%9A%84%E6%A0%BC%E5%BC%8F%E7%AC%A6%E8%BE%93%E5%87%BA%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%EF%BC%8Cformat%E5%91%BD%E4%BB%A4%E5%8F%AA%E6%98%AF%E5%BD%B1%E5%93%8D%E6%95%B0%E6%8D%AE%E8%BE%93%E5%87%BA%E7%9A%84%E6%A0%BC%E5%BC%8F%EF%BC%8C%E8%80%8C%E4%B8%8D%E5%BD%B1%E5%93%8D%E6%95%B0%E6%8D%AE%E7%9A%84%E8%AE%A1%E7%AE%97%E5%92%8C%E5%AD%98%E5%82%A8%E3%80%82">^1</a></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">format 格式符  % 设置数据的输出格式</span><br><span class="line">例如</span><br><span class="line">&gt;&gt;format long</span><br><span class="line">&gt;&gt;50/3</span><br><span class="line">ans=16.66666666666668</span><br><span class="line">&gt;&gt;format</span><br><span class="line">&gt;&gt;50/3</span><br><span class="line">ans=16.667</span><br></pre></td></tr></table></figure>
+
+<h5 id="B-c-常用数学函数"><a href="#B-c-常用数学函数" class="headerlink" title="B.c 常用数学函数"></a><strong>B.c 常用数学函数</strong></h5><h5 id="B-c-a-函数的调用格式"><a href="#B-c-a-函数的调用格式" class="headerlink" title="B.c.a 函数的调用格式"></a><strong>B.c.a 函数的调用格式</strong></h5><p>​          函数自变量规定为矩阵变量当然也可以是标量，标量本身就是矩阵的一种特例，将函数逐项作用于每个元素上，所以最后运算结果就是一个与自变量同型的矩阵</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">比如调用exp函数 exp(x)=e^x</span><br><span class="line">&gt;&gt;A=[4,2;3,6]</span><br><span class="line">A=</span><br><span class="line">  4 2</span><br><span class="line">  3 6</span><br><span class="line">&gt;&gt;B=exp(A)</span><br><span class="line">B=</span><br><span class="line">  54.5982 7.3891</span><br><span class="line">  20.0855 403.4288</span><br></pre></td></tr></table></figure>
+
+<h3 id="C、-常见函数的应用"><a href="#C、-常见函数的应用" class="headerlink" title="C、 常见函数的应用"></a><strong>C、 常见函数的应用</strong></h3><h4 id="1、三角函数以角度为单位在函数名后面加“d”-以示区别"><a href="#1、三角函数以角度为单位在函数名后面加“d”-以示区别" class="headerlink" title="1、三角函数以角度为单位在函数名后面加“d”,以示区别"></a><strong>1、三角函数以角度为单位在函数名后面加“d”,以示区别</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;sin(pi/2)</span><br><span class="line">ans=</span><br><span class="line">   1</span><br><span class="line">&gt;&gt;sind(90)</span><br><span class="line">ans=</span><br><span class="line">   1</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、abs函数求实数的绝对值、复数的模、ASCII的码值"><a href="#2、abs函数求实数的绝对值、复数的模、ASCII的码值" class="headerlink" title="2、abs函数求实数的绝对值、复数的模、ASCII的码值"></a><strong>2、abs函数求实数的绝对值、复数的模、ASCII的码值</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;abs(-4)</span><br><span class="line">ans=</span><br><span class="line">   4</span><br><span class="line">&gt;&gt;abs(3+4i)</span><br><span class="line">ans=</span><br><span class="line">   5</span><br><span class="line">&gt;&gt;abs(&#x27;a&#x27;)</span><br><span class="line">ans= </span><br><span class="line">   97</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、用去取整的函数"><a href="#3、用去取整的函数" class="headerlink" title="3、用去取整的函数"></a><strong>3、用去取整的函数</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">round:四舍五入</span><br><span class="line">floor:向下取整</span><br><span class="line">ceil:向上取整</span><br><span class="line">fix:固定取靠近0的整数，即舍去小数取整</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、求一个三位正整数的个十百位的数字"><a href="#4、求一个三位正整数的个十百位的数字" class="headerlink" title="4、求一个三位正整数的个十百位的数字"></a><strong>4、求一个三位正整数的个十百位的数字</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rem(m,n)   %求m/n的余数</span><br><span class="line">&gt;&gt;345</span><br><span class="line">&gt;&gt;m1=rem(m,10)</span><br><span class="line">m1=</span><br><span class="line">5</span><br><span class="line">&gt;&gt;m2=rem(fix(m/10),10)</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、求区间里的所有素数"><a href="#5、求区间里的所有素数" class="headerlink" title="5、求区间里的所有素数"></a><strong>5、求区间里的所有素数</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">isprime(n) # 判断n是否是素数，是返回1，否返回0.</span><br><span class="line">例子</span><br><span class="line">x=1:100;     %1到100整数组成的向量</span><br><span class="line">k=isprime(x); %判断x中元素是否为素数，是为1，否位0</span><br><span class="line">k1=find(k);  %d得到k中所有1的索引</span><br><span class="line">p=x(k1)    %x中的素数</span><br></pre></td></tr></table></figure>
+
+<h2 id="x3D-x3D-Matlab操作方法-x3D-x3D"><a href="#x3D-x3D-Matlab操作方法-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;Matlab操作方法&#x3D;&#x3D;"></a><strong>&#x3D;&#x3D;Matlab操作方法&#x3D;&#x3D;</strong></h2><h3 id="变量的删除和修改（who-whos）"><a href="#变量的删除和修改（who-whos）" class="headerlink" title="变量的删除和修改（who,whos）"></a><strong>变量的删除和修改（who,whos）</strong></h3><p>在工作区选择变量右击即可进行删除和修改。</p>
+<p>who命令和whos命令：<br>who命令只显示已存在变量的名称。而whos显示信息更多。</p>
+<h3 id="内存变量文件-save-load"><a href="#内存变量文件-save-load" class="headerlink" title="内存变量文件(save,load)"></a><strong>内存变量文件(save,load)</strong></h3><p>用于保存Matlab工作区变量的文件叫做内存变量文件，其扩展名为.mat，也叫MAT文件，是一种标准的二进制格式文件。<br>save命令：创建内存变量文件<br>load命令：载入内存变量文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">save mydata a x   % 将a x保存在mydata.mat文件中</span><br><span class="line">load mydata       % 载入mydata.mat中的变量</span><br></pre></td></tr></table></figure>
+
+<h3 id="MATLAB矩阵表示"><a href="#MATLAB矩阵表示" class="headerlink" title="MATLAB矩阵表示"></a><strong>MATLAB矩阵表示</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">矩阵的建立 </span><br><span class="line">&gt;&gt;A=[1,2,3;4,5,6;7,8,9]</span><br><span class="line">A=</span><br><span class="line">  1 2 3 </span><br><span class="line">  4 5 6</span><br><span class="line">  7 8 9</span><br><span class="line">拼接矩阵</span><br><span class="line">&gt;&gt;A=[1,2,3;4,5,6;7,8,9];</span><br><span class="line">&gt;&gt;B=[-1,-2,-3;-4,-5,-6;-7,-8,-9];</span><br><span class="line">&gt;&gt;C=[A,B;B,A]</span><br><span class="line">可使用实部矩阵和虚部矩阵构成复数矩阵</span><br><span class="line">&gt;&gt;B=[1,2,3;4,5,6];</span><br><span class="line">&gt;&gt;C=[6,7,8;9,10,11];</span><br><span class="line">&gt;&gt;A=B+i*C</span><br></pre></td></tr></table></figure>
+
+<h3 id="冒号表达式-linspace"><a href="#冒号表达式-linspace" class="headerlink" title="冒号表达式(linspace)"></a><strong>冒号表达式(linspace)</strong></h3><h4 id="1、用冒号产生行向量"><a href="#1、用冒号产生行向量" class="headerlink" title="1、用冒号产生行向量"></a><strong>1、用冒号产生行向量</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">格式</span><br><span class="line">e1:e2:e3 (e1:初始值，e2:步长，e3:终止值)   省略步长e2，则步长为1，例如，t=0:5与t=0:1:5等价</span><br><span class="line">&gt;&gt;t=0:1:5</span><br><span class="line">t=</span><br><span class="line">  0 1 2 3 4 5 </span><br></pre></td></tr></table></figure>
+
+<h4 id="2-、用linspace函数产生行向量x"><a href="#2-、用linspace函数产生行向量x" class="headerlink" title="2 、用linspace函数产生行向量x:"></a><strong>2 、用linspace函数产生行向量x:</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">linspace函数</span><br><span class="line"> linspace(a,b,n)   第一个元素，第二个元素，元素总数 当n省略时，自动产生100个元素</span><br><span class="line"> &gt;&gt;x=linspace(0,pi,6)</span><br><span class="line"> x=</span><br><span class="line">   0 0.6283 1.2566 1.8850 2.5133 3.1416</span><br></pre></td></tr></table></figure>
+
+<h3 id="结构矩阵和单元矩阵"><a href="#结构矩阵和单元矩阵" class="headerlink" title="结构矩阵和单元矩阵"></a><strong>结构矩阵和单元矩阵</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">结构矩阵元素.成员名=表达式</span><br><span class="line">例如： 学生这个结构数据包含三个成员，分别是年龄，姓名，学号，由结构数据构成的矩阵就是结构矩阵。结构矩阵里的每个元素都是结构数据类型的。即结构矩阵相当于一个班级，结构矩阵里的元素就是这个班级的学生，每个学生有年龄，姓名，学号三个信息（成员）。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200225195123796.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="相关的操作过程"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">单元数据类型，也是把不同的数据放在一个变量中，但与结构矩阵所不同的是，结构矩阵的各个元素下还有成员，每个成员都有自己的名字，而单元矩阵的各个元素就是不同类型的数据，每个元素直接由不同类型的数据组成。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200225200109661.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="相关操作过程"></p>
+<h3 id="矩阵元素的引用"><a href="#矩阵元素的引用" class="headerlink" title="矩阵元素的引用"></a><strong>矩阵元素的引用</strong></h3><h4 id="1、通过下标引用"><a href="#1、通过下标引用" class="headerlink" title="1、通过下标引用"></a><strong>1、通过下标引用</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;A=[1 2 3;4 5 6;7 8 9]</span><br><span class="line">A=</span><br><span class="line">   1 2 3</span><br><span class="line">   4 5 6</span><br><span class="line">   7 8 9</span><br><span class="line">&gt;&gt;A(3,2)</span><br><span class="line">ans=</span><br><span class="line">    8</span><br></pre></td></tr></table></figure>
+
+<p>如果给出的行下标和列下标大于矩阵的行数和列数，Matlab将自动扩展原来的矩阵，并将扩展后没有赋值的元素赋值为0。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200225200943309.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="2、-利用冒号表达式获得子矩阵-end"><a href="#2、-利用冒号表达式获得子矩阵-end" class="headerlink" title="2、 利用冒号表达式获得子矩阵(end)"></a><strong>2、 利用冒号表达式获得子矩阵(end)</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A(i,:)    第i行的全部元素</span><br><span class="line">A（:,j) 	 第j列的全部元素</span><br><span class="line">A(i:i+m,k:k+m) 第i-i+m行内且在第k-k+m列中的全部元素</span><br><span class="line">A(i:i+m,:)	 第i-i+m行的全部元素</span><br><span class="line">A(end,:)   end运算符</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200225204124604.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="3、c利用空矩阵删除矩阵的元素"><a href="#3、c利用空矩阵删除矩阵的元素" class="headerlink" title="3、c利用空矩阵删除矩阵的元素"></a><strong>3、c利用空矩阵删除矩阵的元素</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">利用空矩阵删除矩阵元素</span><br><span class="line">&gt;&gt;x=[]</span><br><span class="line">x=</span><br><span class="line">  []</span><br><span class="line">x为空矩阵</span><br><span class="line">如下图，删除2-4列的元素</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200225204254928.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="4、改变矩阵的形状-reshape"><a href="#4、改变矩阵的形状-reshape" class="headerlink" title="4、改变矩阵的形状(reshape)"></a><strong>4、改变矩阵的形状(reshape)</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reshape(A,m,n)</span><br><span class="line">A(:)等价于reshape(A,6,1)  变成一列的向量</span><br></pre></td></tr></table></figure>
+
+<p>在矩阵总元素保持不变的前提下，将矩阵A重新排成m ∗ n m*nm∗n的二维矩阵。</p>
+<p>注意：reshape数只是改变原矩阵的行数和列数，但并不改变原矩阵元素个数及其存储顺序。</p>
+<h4 id="5、MATLAB基本运算"><a href="#5、MATLAB基本运算" class="headerlink" title="5、MATLAB基本运算"></a><strong>5、MATLAB基本运算</strong></h4><p><img src="https://img-blog.csdnimg.cn/20200225205324727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200225205433194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200225205539131.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200225205645610.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200225205811959.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200225205913897.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM3ODgzNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://example.com">Jesbin</a>
+            <p>原文链接：<a href="http://example.com/2022/02/18/%E7%AC%AC%E4%B8%80%E5%91%A8matlab%E7%AC%94%E8%AE%B0@Jesbin/">http://example.com/2022/02/18/%E7%AC%AC%E4%B8%80%E5%91%A8matlab%E7%AC%94%E8%AE%B0@Jesbin/</a>
+            <p>发表日期：<a href="http://example.com/2022/02/18/%E7%AC%AC%E4%B8%80%E5%91%A8matlab%E7%AC%94%E8%AE%B0@Jesbin/">February 18th 2022, 10:04:21 am</a>
+            <p>更新日期：<a href="http://example.com/2022/02/18/%E7%AC%AC%E4%B8%80%E5%91%A8matlab%E7%AC%94%E8%AE%B0@Jesbin/">February 18th 2022, 7:32:43 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2022/02/18/%E7%AC%AC%E4%BA%8C%E5%91%A8matlab%E7%AC%94%E8%AE%B0@Jesbin/" title="数模笔记2">
+                    <div class="nextTitle">数模笔记2</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/02/17/two/" title="Hexo配置以及插件文档">
+                    <div class="prevTitle">Hexo配置以及插件文档</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:1515449623@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/fi3ework" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                    
+                    <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+        <div class="website-approve">
+            
+            
+        </div>
+    
+    <!-- <div id="musicMouseDrag" style="position:fixed; z-index: 9999; bottom: 0; right: 0;">
+        <div id="musicDragArea" style="position: sticky; top: 0; left: 0; width: 100%;height: 10px;cursor: move; z-index: 10;"></div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=250 src="//music.163.com/outchain/player?type=0&id=7208908072&auto=1&height=430"></iframe>
+    </div> -->
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+<!-- <div id="musicMouseDrag" style="position:absolute; z-index: 9999; bottom: 0; right: 0;">
+        <div id="musicDragArea" style="position: fixed; top: 0; width: 100%;height: 10px;cursor: pointer; z-index: 10;"></div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=220 src="//music.163.com/outchain/player?type=0&id=7208908072&auto=1&height=430"></iframe>
+</div> -->
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%91%A8%E7%AC%94%E8%AE%B0-Jesbin"><span class="toc-number">1.</span> <span class="toc-text">第一周笔记@Jesbin</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#x3D-x3D-Matlab%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9E%8B-x3D-x3D"><span class="toc-number">1.1.</span> <span class="toc-text">&#x3D;&#x3D;Matlab常用模型&#x3D;&#x3D;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">预测模型:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%A8%A1%E5%9E%8B%EF%BC%9A"><span class="toc-number">1.1.2.</span> <span class="toc-text">优化模型：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BB%B7%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.3.</span> <span class="toc-text">评价模型:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E6%8F%8F%E8%BF%B0%E6%80%A7%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-number">1.1.4.</span> <span class="toc-text">数据的描述性统计分析：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x3D-x3D-Matlab%E5%B8%B8%E7%94%A8%E5%8D%81%E5%A4%A7%E7%AE%97%E6%B3%95-x3D-x3D"><span class="toc-number">1.2.</span> <span class="toc-text">&#x3D;&#x3D;Matlab常用十大算法&#x3D;&#x3D;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E8%92%99%E7%89%B9%E5%85%8B%E7%BD%97%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.1.</span> <span class="toc-text">1、蒙特克罗算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E6%95%B0%E6%8D%AE%E6%8B%9F%E5%90%88%EF%BC%8C%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%EF%BC%8C%E6%8F%92%E5%80%BC%E7%AD%89%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.2.</span> <span class="toc-text">2、数据拟合，参数估计，插值等数据处理算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%EF%BC%8C%E6%95%B4%E6%95%B0%E8%A7%84%E5%88%92%E3%80%81%E5%A4%9A%E5%85%83%E8%A7%84%E5%88%92%E3%80%81%E4%BA%8C%E6%AC%A1%E8%A7%84%E5%88%92%E7%AD%89%E8%A7%84%E5%88%92%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.3.</span> <span class="toc-text">3、线性规划，整数规划、多元规划、二次规划等规划类问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.4.</span> <span class="toc-text">4、图论算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E3%80%81%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2%E3%80%81%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95%E3%80%81%E5%88%86%E6%94%AF%E5%AE%9A%E7%95%8C%E7%AD%89%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.5.</span> <span class="toc-text">5、动态规划、回溯搜索、分治算法、分支定界等计算机算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA%E7%9A%84%E4%B8%89%E5%A4%A7%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95%EF%BC%9A%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E6%B3%95%E3%80%81%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E3%80%81%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.6.</span> <span class="toc-text">6、最优化理论的三大经典算法：模拟退火法、神经网络、遗传算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81%E7%BD%91%E7%BB%9C%E7%AE%97%E6%B3%95%E5%92%8C%E7%A9%B7%E4%B8%BE%E6%B3%95"><span class="toc-number">1.2.7.</span> <span class="toc-text">7、网络算法和穷举法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8%E3%80%81%E8%BF%9E%E7%BB%AD%E7%A6%BB%E6%95%A3%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.8.</span> <span class="toc-text">8、连续离散化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9%E3%80%81%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.9.</span> <span class="toc-text">9、数值分析算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10%E3%80%81%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.10.</span> <span class="toc-text">10、图像处理算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x3D-x3D-Matlab%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AF%AD%E6%B3%95-x3D-x3D"><span class="toc-number">1.3.</span> <span class="toc-text">&#x3D;&#x3D;Matlab常用的语法&#x3D;&#x3D;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.1.</span> <span class="toc-text">软件的一些基本命令操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#A-MATLAB%E7%9A%84%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">A. MATLAB的搜索路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B%E3%80%81-MATLAB%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">B、 MATLAB数值数据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#B-a-%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%88%86%E7%B1%BB-class"><span class="toc-number">1.3.1.2.1.</span> <span class="toc-text">B.a 数值数据类型的分类(class)</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-%E6%95%B4%E5%BD%A2%EF%BC%9A"><span class="toc-number">1.3.1.2.1.1.</span> <span class="toc-text">1 整形：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-%E6%B5%AE%E7%82%B9%E5%9E%8B%EF%BC%9A%EF%BC%88%E5%8D%95%EF%BC%9A4%EF%BC%8C%E5%8F%8C%EF%BC%9A8%EF%BC%89"><span class="toc-number">1.3.1.2.1.2.</span> <span class="toc-text">2 浮点型：（单：4，双：8）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-%E5%A4%8D%E6%95%B0%E5%9E%8B%EF%BC%9A"><span class="toc-number">1.3.1.2.1.3.</span> <span class="toc-text">3 复数型：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#B-b-%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-format-1"><span class="toc-number">1.3.1.2.2.</span> <span class="toc-text">B.b 数值数据的输出格式(format)^1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#B-c-%E5%B8%B8%E7%94%A8%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.1.2.3.</span> <span class="toc-text">B.c 常用数学函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#B-c-a-%E5%87%BD%E6%95%B0%E7%9A%84%E8%B0%83%E7%94%A8%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.1.2.4.</span> <span class="toc-text">B.c.a 函数的调用格式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C%E3%80%81-%E5%B8%B8%E8%A7%81%E5%87%BD%E6%95%B0%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.3.2.</span> <span class="toc-text">C、 常见函数的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0%E4%BB%A5%E8%A7%92%E5%BA%A6%E4%B8%BA%E5%8D%95%E4%BD%8D%E5%9C%A8%E5%87%BD%E6%95%B0%E5%90%8D%E5%90%8E%E9%9D%A2%E5%8A%A0%E2%80%9Cd%E2%80%9D-%E4%BB%A5%E7%A4%BA%E5%8C%BA%E5%88%AB"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">1、三角函数以角度为单位在函数名后面加“d”,以示区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81abs%E5%87%BD%E6%95%B0%E6%B1%82%E5%AE%9E%E6%95%B0%E7%9A%84%E7%BB%9D%E5%AF%B9%E5%80%BC%E3%80%81%E5%A4%8D%E6%95%B0%E7%9A%84%E6%A8%A1%E3%80%81ASCII%E7%9A%84%E7%A0%81%E5%80%BC"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">2、abs函数求实数的绝对值、复数的模、ASCII的码值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E7%94%A8%E5%8E%BB%E5%8F%96%E6%95%B4%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">3、用去取整的函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E6%B1%82%E4%B8%80%E4%B8%AA%E4%B8%89%E4%BD%8D%E6%AD%A3%E6%95%B4%E6%95%B0%E7%9A%84%E4%B8%AA%E5%8D%81%E7%99%BE%E4%BD%8D%E7%9A%84%E6%95%B0%E5%AD%97"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">4、求一个三位正整数的个十百位的数字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E6%B1%82%E5%8C%BA%E9%97%B4%E9%87%8C%E7%9A%84%E6%89%80%E6%9C%89%E7%B4%A0%E6%95%B0"><span class="toc-number">1.3.2.5.</span> <span class="toc-text">5、求区间里的所有素数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x3D-x3D-Matlab%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95-x3D-x3D"><span class="toc-number">1.4.</span> <span class="toc-text">&#x3D;&#x3D;Matlab操作方法&#x3D;&#x3D;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%A0%E9%99%A4%E5%92%8C%E4%BF%AE%E6%94%B9%EF%BC%88who-whos%EF%BC%89"><span class="toc-number">1.4.1.</span> <span class="toc-text">变量的删除和修改（who,whos）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%8F%98%E9%87%8F%E6%96%87%E4%BB%B6-save-load"><span class="toc-number">1.4.2.</span> <span class="toc-text">内存变量文件(save,load)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MATLAB%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.4.3.</span> <span class="toc-text">MATLAB矩阵表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%92%E5%8F%B7%E8%A1%A8%E8%BE%BE%E5%BC%8F-linspace"><span class="toc-number">1.4.4.</span> <span class="toc-text">冒号表达式(linspace)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E7%94%A8%E5%86%92%E5%8F%B7%E4%BA%A7%E7%94%9F%E8%A1%8C%E5%90%91%E9%87%8F"><span class="toc-number">1.4.4.1.</span> <span class="toc-text">1、用冒号产生行向量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E3%80%81%E7%94%A8linspace%E5%87%BD%E6%95%B0%E4%BA%A7%E7%94%9F%E8%A1%8C%E5%90%91%E9%87%8Fx"><span class="toc-number">1.4.4.2.</span> <span class="toc-text">2 、用linspace函数产生行向量x:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E7%9F%A9%E9%98%B5%E5%92%8C%E5%8D%95%E5%85%83%E7%9F%A9%E9%98%B5"><span class="toc-number">1.4.5.</span> <span class="toc-text">结构矩阵和单元矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%85%83%E7%B4%A0%E7%9A%84%E5%BC%95%E7%94%A8"><span class="toc-number">1.4.6.</span> <span class="toc-text">矩阵元素的引用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%80%9A%E8%BF%87%E4%B8%8B%E6%A0%87%E5%BC%95%E7%94%A8"><span class="toc-number">1.4.6.1.</span> <span class="toc-text">1、通过下标引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81-%E5%88%A9%E7%94%A8%E5%86%92%E5%8F%B7%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%8E%B7%E5%BE%97%E5%AD%90%E7%9F%A9%E9%98%B5-end"><span class="toc-number">1.4.6.2.</span> <span class="toc-text">2、 利用冒号表达式获得子矩阵(end)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81c%E5%88%A9%E7%94%A8%E7%A9%BA%E7%9F%A9%E9%98%B5%E5%88%A0%E9%99%A4%E7%9F%A9%E9%98%B5%E7%9A%84%E5%85%83%E7%B4%A0"><span class="toc-number">1.4.6.3.</span> <span class="toc-text">3、c利用空矩阵删除矩阵的元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E6%94%B9%E5%8F%98%E7%9F%A9%E9%98%B5%E7%9A%84%E5%BD%A2%E7%8A%B6-reshape"><span class="toc-number">1.4.6.4.</span> <span class="toc-text">4、改变矩阵的形状(reshape)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81MATLAB%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97"><span class="toc-number">1.4.6.5.</span> <span class="toc-text">5、MATLAB基本运算</span></a></li></ol></li></ol></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 12
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span>
+            <a class="archive-post-title" href="/2022/03/05/note/">note</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/18</span>
+            <a class="archive-post-title" href="/2022/02/18/seven/">Seventh note</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/18</span>
+            <a class="archive-post-title" href="/2022/02/18/six/">深度学习基础1</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span>
+            <a class="archive-post-title" href="/2022/02/16/hello-world/">欢迎来到Jesbin的博客</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/02/27/five/">fiveth note</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/18</span>
+            <a class="archive-post-title" href="/2022/02/18/four/">数模笔记更新</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/02/18/three/">网易云控件的使用</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/02/18/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/18</span>
+            <a class="archive-post-title" href="/2022/02/18/%E7%AC%AC%E4%B8%80%E5%91%A8matlab%E7%AC%94%E8%AE%B0@Jesbin/">数模笔记1</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/18</span>
+            <a class="archive-post-title" href="/2022/02/18/%E7%AC%AC%E4%BA%8C%E5%91%A8matlab%E7%AC%94%E8%AE%B0@Jesbin/">数模笔记2</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/02/17/two/">Hexo配置以及插件文档</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/17</span>
+            <a class="archive-post-title" href="/2022/02/17/one/">One Tags</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="picture">
+                <span class="iconfont-archer">&#xe606;</span>
+                picture
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="hexo">
+                <span class="iconfont-archer">&#xe606;</span>
+                hexo
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="archer">
+                <span class="iconfont-archer">&#xe606;</span>
+                archer
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="introduction">
+                <span class="iconfont-archer">&#xe606;</span>
+                introduction
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="javanote">
+                <span class="iconfont-archer">&#xe606;</span>
+                javanote
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="note">
+                <span class="iconfont-archer">&#xe606;</span>
+                note
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="introduction">
+            <span class="iconfont-archer">&#xe60a;</span>
+            introduction
+        </span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "http://example.com",
+        root: siteMetaRoot,
+        author: "Jesbin"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20220217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20220217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20220217" async></script>
+        
+        <!-- mermaid -->
+        
+            <script src='https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js'></script>
+            <script>
+                if (window.mermaid) {
+                    mermaid.initialize({theme: 'dark'});
+                }
+            </script>
+        
+    </body>
+</html>
