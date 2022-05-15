@@ -207,7 +207,10 @@
     
     <!-- 谷歌统计  -->
     
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.0.0"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+<script src="\assets\js\Meting.min.js" class="meting-script-marker"></script>
+</head>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script type="text/javascript">
@@ -420,6 +423,109 @@
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
                 <main class="main index-page">
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/02/18/%E7%AC%AC%E4%B8%80%E5%91%A8matlab%E7%AC%94%E8%AE%B0@Jesbin/">
+                
+                <span class="abstract-title-text">数模笔记1</span>
+            </a>
+            <div class="abstract-content">
+                <h1 id="第一周笔记-Jesbin"><a href="#第一周笔记-Jesbin" class="headerlink" title="第一周笔记@Jesbin"></a><strong>第一周笔记@Jesbin</strong></h1>
+    <div id="aplayer-YkHirvre" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="6883421967" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="100px" data-preload="auto" data-theme="#FF4081"></div>
+
+<h2 id="x3D-x3D-Matlab常用模型-x3D-x3D"><a href="#x3D-x3D-Matlab常用模型-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;Matlab常用模型&#x3D;&#x3D;"></a><strong>&#x3D;&#x3D;Matlab常用模型&#x3D;&#x3D;</strong></h2><h3 id="预测模型"><a href="#预测模型" class="headerlink" title="预测模型:"></a><strong>预测模型</strong>:</h3><ul>
+<li>神经网络预测、灰色预测、拟合插值预测（线性回归）、时间序列 预测、马尔科夫链预测、微分方程预测、Logistic 模型等等。 </li>
+<li><strong>应用领域</strong>：人口预测、水资源污染增长预测、病毒蔓延预测、竞赛获胜概率 预测、月收入预测、销量预测、经济发展情况预测等在工业、农业、商业等经济 领域，以及环境、社会和军事等领域中的应用</li>
+</ul>
+<h3 id="优化模型："><a href="#优化模型：" class="headerlink" title="优化模型："></a><strong>优化模型：</strong></h3><ul>
+<li><p>规划模型（目标规划、线性规划、非线性规划、整数规划、动态 规划）、图论模型、排队论模型、神经网络模型、现代优化算法（遗传算法、 模拟退火算法、蚁群算法、禁忌搜索算法）等等。</p>
+</li>
+<li><p><strong>应用领域</strong>：快递员派送快递的最短路径问题、水资源调度优化问题、高速路 口收费站问题、军事行动避空侦察的时机和路线选择、物流选址问题、商区布局 规划等各个领域。</p></li></ul>
+            </div>
+            <!-- read more -->
+            
+                <div class="abstract-read-more-button">
+                    <a href="/2022/02/18/%E7%AC%AC%E4%B8%80%E5%91%A8matlab%E7%AC%94%E8%AE%B0@Jesbin/">
+                        <span style="margin-right: 0.2rem;">阅读全文</span>
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </div>
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/02/18">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/02/18</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="note">note</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/02/17/two/">
+                
+                <span class="abstract-title-text">Hexo配置以及插件文档</span>
+            </a>
+            <div class="abstract-content">
+                <p>本篇用于记录我在Hexo个人博客中进行的一些常规设置。</p>
+<h3 id="1、文章使用自动概述配置"><a href="#1、文章使用自动概述配置" class="headerlink" title="1、文章使用自动概述配置"></a>1、文章使用自动概述配置</h3><p>安装相关组件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-excerpt --save</span><br></pre></td></tr></table></figure>
+
+<p>在_config.yml中增加相关配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">###################</span><br><span class="line"># 文章自动化概述生成</span><br><span class="line">excerpt:</span><br><span class="line">  depth: 10</span><br><span class="line">  excerpt_excludes:</span><br><span class="line">  more_excludes: </span><br><span class="line">  hideWholePostExcerpts: true</span><br></pre></td></tr></table></figure>
+            </div>
+            <!-- read more -->
+            
+                <div class="abstract-read-more-button">
+                    <a href="/2022/02/17/two/">
+                        <span style="margin-right: 0.2rem;">阅读全文</span>
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </div>
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/02/27">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/02/17</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="hexo">hexo</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="archer">archer</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
     
         
         
@@ -704,7 +810,33 @@
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -763,7 +895,7 @@
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 12
+        Total : 14
         </div>
         <!-- search  -->
         
@@ -777,6 +909,12 @@
             <div class="archive-year"> 2022 </div>
             <ul class="year-list">
             
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/15</span>
+            <a class="archive-post-title" href="/2022/05/15/pyqt5%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%E7%AC%94%E8%AE%B02/">pyqt5鼠标事件笔记2</a>
+        </li>
+    
         
         <li class="archive-post-item">
             <span class="archive-post-date">03/05</span>
@@ -799,6 +937,21 @@
         <li class="archive-post-item">
             <span class="archive-post-date">02/16</span>
             <a class="archive-post-title" href="/2022/02/16/hello-world/">欢迎来到Jesbin的博客</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/05/15/pyqt5%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%E7%AC%94%E8%AE%B01/">pyqt5鼠标事件笔记1</a>
         </li>
     
         
@@ -918,6 +1071,11 @@
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
         
+            <span class="sidebar-tag-name" data-tags="picture">
+                <span class="iconfont-archer">&#xe606;</span>
+                picture
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="hexo">
                 <span class="iconfont-archer">&#xe606;</span>
                 hexo
@@ -928,19 +1086,14 @@
                 archer
             </span>
         
-            <span class="sidebar-tag-name" data-tags="picture">
+            <span class="sidebar-tag-name" data-tags="introduction">
                 <span class="iconfont-archer">&#xe606;</span>
-                picture
+                introduction
             </span>
         
             <span class="sidebar-tag-name" data-tags="javanote">
                 <span class="iconfont-archer">&#xe606;</span>
                 javanote
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="introduction">
-                <span class="iconfont-archer">&#xe606;</span>
-                introduction
             </span>
         
             <span class="sidebar-tag-name" data-tags="note">

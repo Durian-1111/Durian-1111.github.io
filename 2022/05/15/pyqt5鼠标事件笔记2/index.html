@@ -19,15 +19,15 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta name="description" content="文章tags这块配置都是使用yaml格式语法书写，yaml可以参考这篇完整YAML 语言教程 - 阮一峰的网络日志">
+    <meta name="description" content="本篇博客实现的功能： 一、在main Windows的控件中显示 离线地图 二、可以通过鼠标对该图进行缩放和拖动 （ps：需要显示的图片是离线的，不需要调用cv的库） 代码简单，主要记录思路，下面是具体实现步骤  ①设置控件间的父子层继承关系（这很重要，层设置的不对，图片将无法显示） 本次设置的关系是：main Windows -&lt; QFrame.Box-&lt;label_map-&amp;lt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="One Tags">
-<meta property="og:url" content="http://example.com/2022/02/17/one/index.html">
+<meta property="og:title" content="pyqt5鼠标事件笔记2">
+<meta property="og:url" content="http://example.com/2022/05/15/pyqt5%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%E7%AC%94%E8%AE%B02/index.html">
 <meta property="og:site_name" content="Jesbin&#39;s Blog">
-<meta property="og:description" content="文章tags这块配置都是使用yaml格式语法书写，yaml可以参考这篇完整YAML 语言教程 - 阮一峰的网络日志">
+<meta property="og:description" content="本篇博客实现的功能： 一、在main Windows的控件中显示 离线地图 二、可以通过鼠标对该图进行缩放和拖动 （ps：需要显示的图片是离线的，不需要调用cv的库） 代码简单，主要记录思路，下面是具体实现步骤  ①设置控件间的父子层继承关系（这很重要，层设置的不对，图片将无法显示） 本次设置的关系是：main Windows -&lt; QFrame.Box-&lt;label_map-&amp;lt">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-02-17T03:16:51.417Z">
-<meta property="article:modified_time" content="2022-02-17T14:48:53.866Z">
+<meta property="article:published_time" content="2022-05-15T12:33:02.563Z">
+<meta property="article:modified_time" content="2022-05-15T12:57:53.985Z">
 <meta property="article:author" content="Jesbin">
 <meta property="article:tag" content="note">
 <meta name="twitter:card" content="summary">
@@ -35,7 +35,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>One Tags · Jesbin&#39;s Studio</title>
+    <title>pyqt5鼠标事件笔记2 · Jesbin&#39;s Studio</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -260,7 +260,7 @@
                 <a href="/">Jesbin&#39;s Studio.</a>
             </div>
             <div class="post-title header-element">
-                <a href="#" class="post-name">One Tags</a>
+                <a href="#" class="post-name">pyqt5鼠标事件笔记2</a>
             </div>
         </div>
     
@@ -306,7 +306,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-                One Tags
+                pyqt5鼠标事件笔记2
             <!-- 404 -->
             
         </h1>
@@ -333,13 +333,13 @@
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">68</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">613</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2022/02/17</span>
+                    <span class="post-intro-time">2022/05/15</span>
                     <!-- busuanzi -->
                     
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
@@ -495,26 +495,38 @@
                 <main class="main post-page">
     <article class="article-entry">
         <blockquote>
-<p>文章tags这块配置都是使用yaml格式语法书写，yaml可以参考这篇完整<a href="https://link.zhihu.com/?target=http://www.ruanyifeng.com/blog/2016/07/yaml.html">YAML 语言教程 - 阮一峰的网络日志</a></p>
+<p>本篇博客实现的功能：</p>
+<p>一、在main Windows的控件中显示 离线地图</p>
+<p>二、可以通过鼠标对该图进行缩放和拖动</p>
+<p>（ps：需要显示的图片是离线的，不需要调用cv的库）</p>
+<p>代码简单，主要记录思路，下面是具体实现步骤</p>
+</blockquote>
+<h2 id="①设置控件间的父子层继承关系"><a href="#①设置控件间的父子层继承关系" class="headerlink" title="①设置控件间的父子层继承关系"></a>①设置控件间的父子层继承关系</h2><p>（这很重要，层设置的不对，图片将无法显示）</p>
+<p>本次设置的关系是：main Windows -&lt; QFrame.Box-&lt;label_map-&lt;photo</p>
+<h2 id="②实现图片的显示"><a href="#②实现图片的显示" class="headerlink" title="②实现图片的显示"></a>②实现图片的显示</h2><p>使用QPixmap</p>
 <span id="more"></span>
 
-<p>总结下有两种格式都适用：</p>
-<p>第一种：</p>
-<p>tags: <code>[ &#39;Ruby&#39;, &#39;Perl&#39;, &#39;Python&#39; ]</code></p>
-<p>第二种：</p>
-<p>tags:</p>
-<p>- hexo</p>
-<p>- disqus</p>
-</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">map_show</span>(<span class="params">self</span>):  <span class="comment"># 显示</span></span><br><span class="line">    self.img = QPixmap(<span class="string">&#x27;map.jpg&#x27;</span>)</span><br><span class="line">    self.label_map.setPixmap(self.img)</span><br><span class="line">    self.label_map.setFrameShape(QFrame.Box)</span><br><span class="line">    self.label_map.setLineWidth(<span class="number">1</span>)  <span class="comment"># 设置外线宽度</span></span><br><span class="line">    self.label_w = self.label_map.width()</span><br><span class="line">    self.label_x = self.label_map.x()</span><br><span class="line">    self.label_y = self.label_map.y()</span><br><span class="line">    self.label_h = self.label_map.height()</span><br><span class="line">    <span class="comment"># print(self.label_x,self.label_h)</span></span><br><span class="line">    self.label_map.setScaledContents(<span class="literal">True</span>)  <span class="comment"># 设置label内部图片自适应填充</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="③设置鼠标按下和释放事件"><a href="#③设置鼠标按下和释放事件" class="headerlink" title="③设置鼠标按下和释放事件"></a>③设置鼠标按下和释放事件</h2><p>注意要设置标志位</p>
+<p>左键点击移动，右键点击还原图片</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mousePressEvent</span>(<span class="params">self, e</span>):  <span class="comment"># 鼠标按下事件</span></span><br><span class="line">    <span class="keyword">if</span> e.buttons() == Qt.LeftButton:</span><br><span class="line">        self.flag = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> e.buttons() == Qt.RightButton:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;545&#x27;</span>)</span><br><span class="line">        self.label_x = <span class="number">0</span></span><br><span class="line">        self.label_y = <span class="number">0</span></span><br><span class="line">        self.label_w = <span class="number">861</span></span><br><span class="line">        self.label_h = <span class="number">610</span></span><br><span class="line">        self.label_map.setGeometry(QRect(self.label_x, self.label_y, self.label_w, self.label_h))</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mouseReleaseEvent</span>(<span class="params">self, e</span>):  <span class="comment"># 鼠标释放事件重写</span></span><br><span class="line">    self.flag = <span class="literal">False</span></span><br><span class="line">    self.flag_2 = <span class="literal">False</span></span><br><span class="line">    self.movex = <span class="string">&quot;&quot;</span></span><br><span class="line">    self.movey = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="④-图片移动"><a href="#④-图片移动" class="headerlink" title="④ 图片移动"></a>④ 图片移动</h2><p>注意要调用全局变量的坐标值，不然会影响缩放后再进行移动的效果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mouseMoveEvent</span>(<span class="params">self, e</span>):</span><br><span class="line">    <span class="keyword">if</span> self.flag:</span><br><span class="line">        self.x1 = e.x()</span><br><span class="line">        self.y1 = e.y()</span><br><span class="line">    <span class="keyword">if</span> self.movex != <span class="string">&quot;&quot;</span> <span class="keyword">and</span> self.movey != <span class="string">&quot;&quot;</span>:</span><br><span class="line">        self.label_x = self.label_x + (self.x1 - self.movex)</span><br><span class="line">        self.label_y = self.label_y + (self.y1 - self.movey)</span><br><span class="line">        <span class="built_in">print</span>(self.label_x)</span><br><span class="line">    self.movex = self.x1</span><br><span class="line">    self.movey = self.y1</span><br><span class="line">    <span class="comment"># self.label_map.setGeometry(QtCore.QRect(0, 0, 861, 601))</span></span><br><span class="line"> </span><br><span class="line">    self.label_map.setGeometry(QtCore.QRect(self.label_x, self.label_y, self.label_map.width(), self.label_map.height()))  <span class="comment">#使得图片能够随着缩放而不影响大小，同时QtCore.QRect确定图形为矩形</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="⑤-图片缩放"><a href="#⑤-图片缩放" class="headerlink" title="⑤ 图片缩放"></a>⑤ 图片缩放</h2><p>放大倍数为15</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">wheelEvent</span>(<span class="params">self,e</span>):  <span class="comment"># 缩放</span></span><br><span class="line">    self.angle = e.angleDelta()/<span class="number">8</span></span><br><span class="line">    self.angleY = self.angle.y()</span><br><span class="line">    <span class="keyword">if</span> self.angleY &gt; <span class="number">0</span>:</span><br><span class="line">        x_1 = e.x()</span><br><span class="line">        y_1 = e.y()</span><br><span class="line">        new_w = self.label_map.width() + <span class="number">15</span></span><br><span class="line">        new_h = self.label_map.height() + <span class="number">15</span></span><br><span class="line">        new_x = x_1 - (self.label_map.width() * (x_1 - self.label_map.x())) / (self.label_map.width())</span><br><span class="line">        new_y = y_1 - (self.label_map.height()  * (y_1 - self.label_map.y())) / (self.label_map.height())</span><br><span class="line">        self.label_map.setGeometry(QRect(new_x, new_y, new_w, new_h ))</span><br><span class="line">        <span class="built_in">print</span>(new_x,new_y,new_w,new_h)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">elif</span> self.angleY &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;222&#x27;</span>)</span><br><span class="line">        x_1 = e.x()</span><br><span class="line">        y_1 = e.y()</span><br><span class="line">        self.new_w = self.label_map.width() - <span class="number">15</span></span><br><span class="line">        self.new_h = self.label_map.height() - <span class="number">15</span></span><br><span class="line">        self.new_x = x_1 - (self.label_map.width() * (x_1 - self.label_map.x())) / (self.label_map.width())</span><br><span class="line">        self.new_y = y_1 - (self.label_map.height()  * (y_1 - self.label_map.y())) / (self.label_map.height() )</span><br><span class="line">        self.label_map.setGeometry(QRect(self.new_x, self.new_y, self.new_w, self.new_h ))</span><br><span class="line">        <span class="built_in">print</span>(self.new_x,self.new_y,self.new_w,self.new_h)</span><br></pre></td></tr></table></figure>
+
 
     </article>
     <!-- license -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="http://example.com">Jesbin</a>
-            <p>原文链接：<a href="http://example.com/2022/02/17/one/">http://example.com/2022/02/17/one/</a>
-            <p>发表日期：<a href="http://example.com/2022/02/17/one/">February 17th 2022, 11:16:51 am</a>
-            <p>更新日期：<a href="http://example.com/2022/02/17/one/">February 17th 2022, 10:48:53 pm</a>
+            <p>原文链接：<a href="http://example.com/2022/05/15/pyqt5%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%E7%AC%94%E8%AE%B02/">http://example.com/2022/05/15/pyqt5%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%E7%AC%94%E8%AE%B02/</a>
+            <p>发表日期：<a href="http://example.com/2022/05/15/pyqt5%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%E7%AC%94%E8%AE%B02/">May 15th 2022, 8:33:02 pm</a>
+            <p>更新日期：<a href="http://example.com/2022/05/15/pyqt5%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%E7%AC%94%E8%AE%B02/">May 15th 2022, 8:57:53 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -522,17 +534,12 @@
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2022/02/17/two/" title="Hexo配置以及插件文档">
-                    <div class="nextTitle">Hexo配置以及插件文档</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2022/02/16/hello-world/" title="欢迎来到Jesbin的博客">
-                    <div class="prevTitle">欢迎来到Jesbin的博客</div>
+                <a href="/2022/05/15/pyqt5%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%E7%AC%94%E8%AE%B01/" title="pyqt5鼠标事件笔记1">
+                    <div class="prevTitle">pyqt5鼠标事件笔记1</div>
                 </a>
             
         </li>
@@ -685,7 +692,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%91%A0%E8%AE%BE%E7%BD%AE%E6%8E%A7%E4%BB%B6%E9%97%B4%E7%9A%84%E7%88%B6%E5%AD%90%E5%B1%82%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text">①设置控件间的父子层继承关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%91%A1%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E7%9A%84%E6%98%BE%E7%A4%BA"><span class="toc-number">2.</span> <span class="toc-text">②实现图片的显示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%91%A2%E8%AE%BE%E7%BD%AE%E9%BC%A0%E6%A0%87%E6%8C%89%E4%B8%8B%E5%92%8C%E9%87%8A%E6%94%BE%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">③设置鼠标按下和释放事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%91%A3-%E5%9B%BE%E7%89%87%E7%A7%BB%E5%8A%A8"><span class="toc-number">4.</span> <span class="toc-text">④ 图片移动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%91%A4-%E5%9B%BE%E7%89%87%E7%BC%A9%E6%94%BE"><span class="toc-number">5.</span> <span class="toc-text">⑤ 图片缩放</span></a></li></ol>
             </div>
         
         <!-- sidebar -->
