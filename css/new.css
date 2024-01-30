@@ -1,0 +1,23 @@
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>#recent-posts>.recent-post-item {
+    position: relative;
+}
+
+/* 最新文章图标 */
+.newPost-left,
+.newPost-right {
+    position: relative;
+    top: -20px;
+    color: rgb(255, 255, 255);
+    padding: 5px 18px;
+    font-weight: 700;
+    background-color: #ff9f04;
+    border-radius: 0 0 10px 10px;
+}
+
+.newPost-left {
+    left: 15px;
+}
+
+.newPost-right {
+    right: 15px;
+}
